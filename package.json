@@ -1,6 +1,6 @@
 {
   "name": "mail-monster-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Typescript library SDK for Flow AI's MailMonster",
   "main": "./dist/mail-monster-lib.min.js",
   "types": "./dist/mail-monster-lib.d.ts",
