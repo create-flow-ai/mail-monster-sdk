@@ -31,7 +31,7 @@ export interface IGetLatestEmailRaw {
   attachments?: string;
 }
 
-export interface IGetLatestEmail {
+export interface IGetLatestEmail extends IGetLatestEmailCore {
   attachments: Attachment[];
 }
 
