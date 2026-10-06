@@ -1,6 +1,6 @@
 import { Attachment } from 'mailparser';
 
-const LATEST_EMAIL_ENDPOINT = 'https://mail-monster-api.create-flow.ai/api/latest?';
+const DEFAULT_HOST = 'https://mail-monster-api.create-flow.ai';
 
 /**
  * Parameters for fetching the latest emails via Mail Monster API.
@@ -10,6 +10,7 @@ const LATEST_EMAIL_ENDPOINT = 'https://mail-monster-api.create-flow.ai/api/lates
  * @property subject - (Optional) Case-insensitive substring to search for in the subject.
  * @property keyword - (Optional) Case-insensitive string to match anywhere in subject, sender, content, or attachments.
  * @property count - (Optional) Maximum number of email messages to return. Defaults to a small value if not specified.
+ * @property host - (Optional) Absolute API host URL. Defaults to https://mail-monster-api.create-flow.ai.
  */
 export interface IGetLatestEmailParams {
   api_key: string;
@@ -17,6 +18,7 @@ export interface IGetLatestEmailParams {
   subject?: string;
   keyword?: string;
   count?: number;
+  host?: string;
 }
 
 export interface IGetLatestEmailCore {
@@ -36,7 +38,7 @@ export interface IGetLatestEmail extends IGetLatestEmailCore {
 }
 
 export async function getLatestEmails(params: IGetLatestEmailParams): Promise<IGetLatestEmail[]> {
-  const url = new URL(LATEST_EMAIL_ENDPOINT);
+  const url = new URL('/api/latest', params.host || DEFAULT_HOST);
   url.searchParams.append('apikey', params.api_key);
   if (params.email) { url.searchParams.append('email', params.email); }
   if (params.subject) { url.searchParams.append('title', params.subject); }
